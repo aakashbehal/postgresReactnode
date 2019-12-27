@@ -24,7 +24,7 @@ class Login extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push("/dashboard"); // push user to dashboard when they login
-    } 
+    }
     if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors
@@ -37,15 +37,19 @@ class Login extends Component {
   };
 
   onSubmit = e => {
-    e.preventDefault(); const userData = {
+    e.preventDefault();
+
+    const userData = {
       email: this.state.email,
       password: this.state.password
-    }; this.props.loginUser(userData); // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
+    };
+
+    this.props.loginUser(userData); // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
   };
 
   render() {
-    const { errors } = this.state; 
-    
+    const { errors } = this.state;
+
     return (
       <div className="container">
         <div style={{ marginTop: "4rem" }} className="row">
@@ -64,9 +68,10 @@ class Login extends Component {
             </div>
 
             <div className="col s12">
-              { errors.message ? <p className="error-message">{errors.message}</p>  : null }
+              {errors.message ? (
+                <p className="error-message">{errors.message}</p>
+              ) : null}
             </div>
-            
 
             <form noValidate onSubmit={this.onSubmit}>
               <div className="input-field col s12">

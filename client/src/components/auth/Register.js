@@ -37,23 +37,21 @@ class Register extends Component {
   };
 
   onSubmit = e => {
-    e.preventDefault(); 
-    
+    e.preventDefault();
+
     const newUser = {
       user_name: this.state.user_name,
       email: this.state.email,
       password: this.state.password,
       password2: this.state.password2
-    }; 
-    
+    };
+
     this.props.registerUser(newUser, this.props.history);
   };
 
   render() {
+    const { errors } = this.state;
 
-    const { errors } = this.state; 
-    
-    
     return (
       <div className="container">
         <div className="row">
@@ -72,9 +70,10 @@ class Register extends Component {
             </div>
 
             <div className="col s12">
-              { errors.message ? <p className="error-message">{errors.message}</p>  : null }
+              {errors.message ? (
+                <p className="error-message">{errors.message}</p>
+              ) : null}
             </div>
-            
 
             <form noValidate onSubmit={this.onSubmit}>
               <div className="input-field col s12">
@@ -141,8 +140,7 @@ Register.propTypes = {
   errors: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => (console.log(state), {
-  
+const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
 });
