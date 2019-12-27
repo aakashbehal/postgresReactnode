@@ -80,6 +80,7 @@ class Login extends Component {
                   value={this.state.email}
                   id="email"
                   type="email"
+                  className="validate"
                 />
                 <label htmlFor="email">Email</label>
               </div>
