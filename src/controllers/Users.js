@@ -18,6 +18,11 @@ const signup = async (req, res) => {
       .status(400)
       .send({ message: "Please enter a valid email address" });
   }
+  if (req.body.password != req.body.password2) {
+    return res
+      .status(400)
+      .send({ message: "Password and Confirm password do not match" });
+  }
   const hashPassword = Helper.passwordHash(req.body.password);
 
   const createQuery = `INSERT INTO users (id, email, user_name, password, created_date, modified_date) VALUES($1, $2, $3, $4, $5, $6)`;
@@ -30,7 +35,6 @@ const signup = async (req, res) => {
     new Date(),
     new Date()
   ];
-  console.log(values);
   try {
     const { rows } = await db.query(createQuery, values);
     const token = Helper.generateToken(values[0].id);

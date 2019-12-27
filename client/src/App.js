@@ -47,7 +47,7 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div className="App">
-            <Navbar />
+            {/* <Navbar /> */}
             <Redirect exact from="/" to="/login" />
             <Route exact path="/forget_password" component={ForgetPassword} />
             <Route exact path="/reset_password" component={ResetPassword} />

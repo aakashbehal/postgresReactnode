@@ -39,50 +39,65 @@ class Forgetpass extends Component {
     const { errors } = this.state;
 
     return (
-      <div className="container">
-        <div style={{ marginTop: "4rem" }} className="row">
-          <div className="col s8 offset-s2">
-            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-              <h4>
-                <b>Forgot Password</b>
-              </h4>
-              <p className="grey-text text-darken-1">
-                Go back to <Link to="/login">Login</Link>
-              </p>
-            </div>
-
-            <div className="col s12">
-              {errors.message ? (
-                <p className="error-message">{errors.message}</p>
-              ) : null}
-            </div>
-
-            <form noValidate onSubmit={this.onSubmit}>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.email}
-                  id="email"
-                  type="email"
-                />
-                <label htmlFor="email">Email</label>
+      <div className="container-scroller">
+        <div className="container-fluid page-body-wrapper full-page-wrapper">
+          <div className="content-wrapper d-flex align-items-stretch auth auth-img-bg">
+            <div className="row flex-grow">
+              <div className="col-lg-6 d-flex align-items-center justify-content-center">
+                <div className="auth-form-transparent text-left p-3">
+                  <div className="brand-logo">
+                    <img src="./images/logo.svg" alt="logo" />
+                  </div>
+                  <h4>Welcome back!</h4>
+                  <h6 className="font-weight-light">Happy to see you again!</h6>
+                  <div className="col s12">
+                    {errors.message ? (
+                      <p className="error-message">{errors.message}</p>
+                    ) : null}
+                  </div>
+                  <form className="pt-3" noValidate onSubmit={this.onSubmit}>
+                    <div className="form-group">
+                      <label htmlFor="email">Username</label>
+                      <div className="input-group">
+                        <div className="input-group-prepend bg-transparent">
+                          <span className="input-group-text bg-transparent border-right-0">
+                            <i className="mdi mdi-account-outline text-primary"></i>
+                          </span>
+                        </div>
+                        <input
+                          onChange={this.onChange}
+                          value={this.state.email}
+                          type="email"
+                          className="form-control form-control-lg border-left-0"
+                          id="email"
+                          placeholder="Email"
+                        />
+                      </div>
+                    </div>
+            
+                    <div className="text-center mt-4 font-weight-light">
+                      <p>A reset Link will be sent to the above email</p>
+                    </div>
+                    <div className="my-3">
+                      <button
+                        type="submit"
+                        className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
+                      >
+                        SEND
+                      </button>
+                    </div>
+                    <div className="text-center mt-4 font-weight-light">
+                      Don't have an account? <Link to="/register">Create</Link>
+                    </div>
+                  </form>
+                </div>
               </div>
-              <p>A reset Link will be sent to the above email</p>
-              <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                <button
-                  style={{
-                    width: "150px",
-                    borderRadius: "3px",
-                    letterSpacing: "1.5px",
-                    marginTop: "1rem"
-                  }}
-                  type="submit"
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                >
-                  Send
-                </button>
+              <div className="col-lg-6 login-half-bg d-flex flex-row">
+                <p className="text-white font-weight-medium text-center flex-grow align-self-end">
+                  Copyright &copy; 2019 All rights reserved.
+                </p>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
@@ -101,7 +116,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-  { forgotPassword }
-)(Forgetpass);
+export default connect(mapStateToProps, { forgotPassword })(Forgetpass);

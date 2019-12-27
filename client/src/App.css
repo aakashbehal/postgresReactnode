@@ -1,4 +1,11 @@
-.App {
+@import url("../public/vendors/mdi/css/materialdesignicons.min.css");
+@import url("../public/vendors/feather/feather.css");
+@import url("../public/vendors/css/vendor.bundle.base.css");
+@import url("../public/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css");
+@import url("../public/css/style.css");
+
+
+/* .App {
   text-align: center;
 }
 
@@ -19,15 +26,17 @@
 }
 
 
+
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+} */
+
 .error-message{
   background: red;
     color: white;
     padding: 15px;
     border-radius: 3px;
     font-weight: 600;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }

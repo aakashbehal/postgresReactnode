@@ -51,66 +51,107 @@ class Login extends Component {
     const { errors } = this.state;
 
     return (
-      <div className="container">
-        <div style={{ marginTop: "4rem" }} className="row">
-          <div className="col s8 offset-s2">
-            {/* <Link to="/" className="btn-flat waves-effect">
-              <i className="material-icons left">keyboard_backspace</i> Back to
-              home
-            </Link> */}
-            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-              <h4>
-                <b>Login</b> below
-              </h4>
-              <p className="grey-text text-darken-1">
-                Don't have an account? <Link to="/register">Register</Link>
-              </p>
+      <div className="container-scroller">
+        <div className="container-fluid page-body-wrapper full-page-wrapper">
+          <div className="content-wrapper d-flex align-items-stretch auth auth-img-bg">
+            <div className="row flex-grow">
+              <div className="col-lg-6 d-flex align-items-center justify-content-center">
+                <div className="auth-form-transparent text-left p-3">
+                  <div className="brand-logo">
+                    <img src="./images/logo.svg" alt="logo" />
+                  </div>
+                  <h4>Welcome back!</h4>
+                  <h6 className="font-weight-light">Happy to see you again!</h6>
+                  <div className="col s12">
+                    {errors.message ? (
+                      <p className="error-message">{errors.message}</p>
+                    ) : null}
+                  </div>
+                  <form className="pt-3" noValidate onSubmit={this.onSubmit}>
+                    <div className="form-group">
+                      <label htmlFor="email">Username</label>
+                      <div className="input-group">
+                        <div className="input-group-prepend bg-transparent">
+                          <span className="input-group-text bg-transparent border-right-0">
+                            <i className="mdi mdi-account-outline text-primary"></i>
+                          </span>
+                        </div>
+                        <input
+                          onChange={this.onChange}
+                          value={this.state.email}
+                          type="email"
+                          className="form-control form-control-lg border-left-0"
+                          id="email"
+                          placeholder="Email"
+                        />
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="password">Password</label>
+                      <div className="input-group">
+                        <div className="input-group-prepend bg-transparent">
+                          <span className="input-group-text bg-transparent border-right-0">
+                            <i className="mdi mdi-lock-outline text-primary"></i>
+                          </span>
+                        </div>
+                        <input
+                          onChange={this.onChange}
+                          value={this.state.password}
+                          type="password"
+                          className="form-control form-control-lg border-left-0"
+                          id="password"
+                          placeholder="Password"
+                        />
+                      </div>
+                    </div>
+                    <div className="my-2 d-flex justify-content-between align-items-center">
+                      <div className="form-check">
+                        <label className="form-check-label text-muted">
+                          <input type="checkbox" className="form-check-input" />
+                          Keep me signed in
+                        </label>
+                      </div>
+                      <Link
+                        className="auth-link text-black"
+                        to="/forget_password"
+                      >
+                        Forgot Password
+                      </Link>
+                    </div>
+                    <div className="my-3">
+                      <button
+                        type="submit"
+                        className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
+                      >
+                        LOGIN
+                      </button>
+                    </div>
+                    <div className="mb-2 d-flex">
+                      <button
+                        type="button"
+                        className="btn btn-facebook auth-form-btn flex-grow mr-1"
+                      >
+                        <i className="mdi mdi-facebook mr-2"></i>Facebook
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-google auth-form-btn flex-grow ml-1"
+                      >
+                        <i className="mdi mdi-google mr-2"></i>Google
+                      </button>
+                    </div>
+                    <div className="text-center mt-4 font-weight-light">
+                      Don't have an account? <Link to="/register">Create</Link>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div className="col-lg-6 login-half-bg d-flex flex-row">
+                <p className="text-white font-weight-medium text-center flex-grow align-self-end">
+                  Copyright &copy; 2019 All rights reserved.
+                </p>
+              </div>
             </div>
-
-            <div className="col s12">
-              {errors.message ? (
-                <p className="error-message">{errors.message}</p>
-              ) : null}
-            </div>
-
-            <form noValidate onSubmit={this.onSubmit}>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.email}
-                  id="email"
-                  type="email"
-                  className="validate"
-                />
-                <label htmlFor="email">Email</label>
-              </div>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.password}
-                  id="password"
-                  type="password"
-                />
-                <label htmlFor="password">Password</label>
-              </div>
-              <p className="grey-text text-darken-1">
-                <Link to="/forget_password">Forgot Password</Link>
-              </p>
-              <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                <button
-                  style={{
-                    width: "150px",
-                    borderRadius: "3px",
-                    letterSpacing: "1.5px",
-                    marginTop: "1rem"
-                  }}
-                  type="submit"
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                >
-                  Login
-                </button>
-              </div>
-            </form>
           </div>
         </div>
       </div>
@@ -129,7 +170,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-  { loginUser }
-)(Login);
+export default connect(mapStateToProps, { loginUser })(Login);
