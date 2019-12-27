@@ -18,6 +18,7 @@ app.get('/', (req, res) => {
 
 app.post('/api/v1/users/signup', Users.signup);
 app.post('/api/v1/users/login', Users.login);
+app.post('/api/v1/users/forgotpassword', Users.forgotpassword);
 
 app.listen(5000, () => {
     console.log('app running on port ', 5000)

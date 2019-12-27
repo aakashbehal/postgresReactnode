@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 
@@ -8,13 +8,14 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 import Navbar from "./components/layout/Navbar";
-import Landing from "./components/layout/Landing";
+import ForgetPassword from "./components/auth/Forgetpass";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 
 import "./App.css";
+import ResetPassword from "./components/auth/Resetpass";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -42,7 +43,9 @@ class App extends Component {
         <Router>
           <div className="App">
             <Navbar />
-            <Route exact path="/" component={Landing} />
+            <Redirect exact from="/" to="/login" />
+            <Route exact path="/forget_password" component={ForgetPassword} />
+            <Route exact path="/reset_password" component={ResetPassword} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Switch>

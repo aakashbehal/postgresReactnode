@@ -20,7 +20,7 @@ const signup = async (req, res) => {
     }
     const hashPassword = Helper.passwordHash(req.body.password)
 
-    const createQuery = `INSERT INTO users (id, email, user_name, password, created_date, modified_date) VALUES($1, $2, $3, $4, $5) returing *`
+    const createQuery = `INSERT INTO users (id, email, user_name, password, created_date, modified_date) VALUES($1, $2, $3, $4, $5, $6)`
 
     const values = [
         uuidv4(),
@@ -33,11 +33,11 @@ const signup = async (req, res) => {
     console.log(values)
     try {
         const { rows } = await db.query(createQuery, values);
-        const token = Helper.generateToken(rows[0].id)
+        const token = Helper.generateToken(values[0].id)
         return res.status(201).send({ token });
     } catch (error) {
         if (error.routine == '_bt_check_unique') {
-            return res.status(400).send({ 'message': 'User with that EMAIL already exist' })
+            return res.status(400).send({ 'message': 'User with that email already exist' })
         }
         return res.status(400).send(error);
     }
@@ -76,7 +76,28 @@ const login = async (req, res) => {
     }
 }
 
+const forgotpassword = async (req, res) => {
+    if (!Helper.isEmailValid(req.body.email)) {
+        return res.status(400).send({ 'message': 'Please enter a valid email address' })
+    }
+
+    const text = 'SELECT * FROM users WHERE email = $1';
+    
+    try {
+        const { rows } = await db.query(text, [req.body.email]);
+        if (!rows[0]) {
+            return res.status(400).send({ 'message': 'This email is not register with us, please register first' });
+        }
+        return res.status(200).send({ email: rows[0].email });
+    }
+    catch (error) {
+        return res.status(400).send(error)
+    }
+
+}
+
 module.exports = {
     signup,
-    login
+    login,
+    forgotpassword
 }

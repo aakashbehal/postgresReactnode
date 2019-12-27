@@ -1,7 +1,9 @@
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 
-import jwt_decode from "jwt-decode";import {
+import jwt_decode from "jwt-decode";
+
+import {
   GET_ERRORS,
   SET_CURRENT_USER,
   USER_LOADING
@@ -9,7 +11,7 @@ import jwt_decode from "jwt-decode";import {
 
 export const registerUser = (userData, history) => dispatch => {
   axios
-    .post("/api/users/register", userData)
+    .post("/api/v1/users/signup", userData)
     .then(res => history.push("/login")) // re-direct to login on successful register
     .catch(err =>
       dispatch({
@@ -40,6 +42,18 @@ export const loginUser = userData => dispatch => {
       })
     );
 };// Set logged in user
+
+export const forgotPassword = (userData, history) => dispatch => {
+  axios
+    .post("/api/v1/users/forgotpassword", userData)
+    .then(res => history.push("/reset_password")) // re-direct to forgotpassword
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};// Login - get user token
 
 export const setCurrentUser = decoded => {
   return {

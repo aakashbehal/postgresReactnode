@@ -37,23 +37,31 @@ class Register extends Component {
   };
 
   onSubmit = e => {
-    e.preventDefault(); const newUser = {
-      name: this.state.name,
+    e.preventDefault(); 
+    
+    const newUser = {
+      user_name: this.state.user_name,
       email: this.state.email,
       password: this.state.password,
       password2: this.state.password2
-    }; this.props.registerUser(newUser, this.props.history);
+    }; 
+    
+    this.props.registerUser(newUser, this.props.history);
   };
 
   render() {
-    const { errors } = this.state; return (
+
+    const { errors } = this.state; 
+    
+    
+    return (
       <div className="container">
         <div className="row">
           <div className="col s8 offset-s2">
-            <Link to="/" className="btn-flat waves-effect">
+            {/* <Link to="/" className="btn-flat waves-effect">
               <i className="material-icons left">keyboard_backspace</i> Back to
               home
-            </Link>
+            </Link> */}
             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
               <h4>
                 <b>Register</b> below
@@ -62,62 +70,48 @@ class Register extends Component {
                 Already have an account? <Link to="/login">Log in</Link>
               </p>
             </div>
+
+            <div className="col s12">
+              { errors.message ? <p className="error-message">{errors.message}</p>  : null }
+            </div>
+            
+
             <form noValidate onSubmit={this.onSubmit}>
               <div className="input-field col s12">
                 <input
                   onChange={this.onChange}
-                  value={this.state.name}
-                  error={errors.name}
-                  id="name"
+                  value={this.state.user_name}
+                  id="user_name"
                   type="text"
-                  className={classnames("", {
-                    invalid: errors.name
-                  })}
                 />
-                <label htmlFor="name">Name</label>
-                <span className="red-text">{errors.name}</span>
+                <label htmlFor="user_name">Name</label>
               </div>
               <div className="input-field col s12">
                 <input
                   onChange={this.onChange}
                   value={this.state.email}
-                  error={errors.email}
                   id="email"
                   type="email"
-                  className={classnames("", {
-                    invalid: errors.email
-                  })}
                 />
                 <label htmlFor="email">Email</label>
-                <span className="red-text">{errors.email}</span>
               </div>
               <div className="input-field col s12">
                 <input
                   onChange={this.onChange}
                   value={this.state.password}
-                  error={errors.password}
                   id="password"
                   type="password"
-                  className={classnames("", {
-                    invalid: errors.password
-                  })}
                 />
                 <label htmlFor="password">Password</label>
-                <span className="red-text">{errors.password}</span>
               </div>
               <div className="input-field col s12">
                 <input
                   onChange={this.onChange}
                   value={this.state.password2}
-                  error={errors.password2}
                   id="password2"
                   type="password"
-                  className={classnames("", {
-                    invalid: errors.password2
-                  })}
                 />
                 <label htmlFor="password2">Confirm Password</label>
-                <span className="red-text">{errors.password2}</span>
               </div>
               <div className="col s12" style={{ paddingLeft: "11.250px" }}>
                 <button
@@ -147,7 +141,8 @@ Register.propTypes = {
   errors: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => (console.log(state), {
+  
   auth: state.auth,
   errors: state.errors
 });
